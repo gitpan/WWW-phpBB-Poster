@@ -1,0 +1,36 @@
+WWW-phpBB-Poster version 0.01
+=============================
+
+I wrote this module for own purposes - exactly for generating SEO-ready forums, already filled in with some parsed data.
+Hope, it shall be useful for you :)
+
+P.S. It handles only MySQL and SQLite phpBB installation.
+
+P.P.S. It is NOT suggested for fork using - if so - you may got strange results with posts and topics.
+If you want to use this module with forks - please, fix it manually for InnoDB using - commiting, etc.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+   make clean
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+  DBI
+  Digest::MD5
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2010 by Andrew Jumash
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.10.1 or,
+at your option, any later version of Perl 5 you may have available.
+
