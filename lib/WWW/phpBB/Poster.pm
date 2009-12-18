@@ -3,7 +3,7 @@ package WWW::phpBB::Poster;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 use DBI;
 use Digest::MD5 qw[md5_hex];
 
@@ -17,7 +17,6 @@ WWW::phpBB::Poster - phpBB forum poster
 
     # scrape as guest
     my $phpbb   =   WWW::phpBB::Poster->new({
-        base_url    =>  'http://localhost/forum',
         db_host     =>  'localhost',
         db_user     =>  'root',
         db_password =>  'somepass',
@@ -59,11 +58,9 @@ None.
 
 Creates a new WWW::phpBB::Poster object.
 
-Required parameters:
+Required parameters: HASH REF
 
-HASH REF: 
-=over 4
-
+=over
 
 =item * C<< db_user => $mysql_user >>
 
@@ -73,9 +70,10 @@ Database with an already installed phpBB forum.
 
 =back
 
-Optional parameters:
-HASH REF: 
-=over 4
+Optional parameters: HASH REF
+
+=over
+
 =item * C<< db_host => $sql_host >>
 
 By default, sets to localhost
@@ -139,17 +137,17 @@ sub new {
 Tries to select user from DB, if none - tries to insert user into DB.
 Returns ID of user.
 
-Required parameters:
-HASH REF: 
-=over 1
+Required parameters: HASH REF
+
+=over
 
 =item * C<< login => q[Vasya] >>
 
 =back
 
-Optional parameters:
-HASH REF: 
-=over 7
+Optional parameters: HASH REF
+
+=over
 
 =item * C<< password => $phpbb_hash_password >>
 
@@ -178,6 +176,7 @@ By default, sets to empty value
 =item * C<< user_regdate => time >>
 
 By default, sets to current time
+
 =back
 
 =cut
@@ -226,17 +225,29 @@ sub setUser {
 }
 
 =head2 $phpbb->getUser($intUserID)
+
 Gets user data by ID. Returns a hash of values
-=over 8
+
+=over
+
 =item * C<< userID >>
+
 =item * C<< user_type >>
+
 =item * C<< user_regdate >>
+
 =item * C<< login >>
+
 =item * C<< password >>
+
 =item * C<< email >>
+
 =item * C<< user_from >>
+
 =item * C<< group_id >>
+
 =back
+
 =cut
 sub getUser {
     my ($self, $userID) = @_;
@@ -258,21 +269,27 @@ Tries to select topic by title and forum id from DB, if none - tries to insert t
 
 Returns ID of topic.
 
-Required parameters:
-HASH REF: 
-=over 4
+Required parameters: HASH REF
+
+=over
 
 =item * C<< title => q[My first topic] >>
+
 =item * C<< text => q[Content of topic] >>
+
 =item * C<< forumID => 2 >>
+
 =item * C<< userID => 2 >>
+
 ID 1 - Anonymous
 ID 2 - admin
 
 =back
 
-Optional parameters:
-HASH REF: 
+Optional parameters: HASH REF
+
+=over
+
 =item * C<< created => time() >>
 
 By default, sets with current time
@@ -282,6 +299,7 @@ By default, sets with current time
 By default - 1 - syncing forum stats after topic adding;
 
 =back
+
 =cut
 sub setTopic {
     my ($self, $params) = @_;
@@ -349,21 +367,35 @@ sub setTopic {
     return $topicID;
 }
 =head2 $phpbb->getTopic($intTopicID)
+
 Gets topic data by ID. Returns a hash of values
 
-=over 11
+=over
+
 =item * C<< topic_title >>
+
 =item * C<< forum_id >>
+
 =item * C<< topic_poster >>
+
 =item * C<< topic_first_poster_name >>
+
 =item * C<< topic_last_poster_id >>
+
 =item * C<< topic_last_poster_name >>
+
 =item * C<< topic_last_post_subject >>
+
 =item * C<< topic_last_post_time >>
+
 =item * C<< topic_time >>
+
 =item * C<< topic_first_post_id >>
+
 =item * C<< topic_last_post_id >>
+
 =back
+
 =cut
 sub getTopic {
     my ($self, $topicID) = @_;
@@ -393,21 +425,27 @@ Adds post content to topic.
 
 Returns ID of post or undef if no such topic or user.
 
-Required parameters:
-HASH REF: 
-=over 4
+Required parameters: HASH REF
+
+=over 
 
 =item * C<< title => q[My first topic] >>
+
 =item * C<< text => q[Content of topic] >>
+
 =item * C<< forumID => 2 >>
+
 =item * C<< userID => 2 >>
+
 ID 1 - Anonymous
 ID 2 - admin
 
 =back
 
-Optional parameters:
-HASH REF: 
+Optional parameters: HASH REF
+
+=over
+
 =item * C<< created => time() >>
 
 By default, sets with current time
@@ -419,7 +457,6 @@ By default - 1 - syncing forum stats after post adding;
 =item * C<< first_post => 0/1 >>
 
 By default - 0 - adds 'Re: ' to the post title;
-
 
 =back
 =cut
@@ -498,9 +535,11 @@ sub setPost {
 
 
 =head2 $phpbb->getTopicList($intLimit)
+
 Gets topics list.
 If limit is undefined, method will return you the whole list of topics.
 Return format: array of arrays - first key is topic ID, second - topic name.
+
 =cut
 sub getTopicList {
     my ($self, $limit) = @_;
@@ -558,7 +597,7 @@ Andrew Jumash, E<lt>skazo4nik@gmail.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2010 by Andrew Jumash
+Copyright (C) 2010 by Andrew Jumash, http://www.skazkin.ru
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.8 or,
