@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::phpBB::Poster.
 
+0.04  Thu Feb 04 11:21:10 2010
+	- Post duplication fixed
+	- Perl version lowered
+
 0.03  Mon Dec 21 10:56:10 2009
 	- Dependencies fixed
 

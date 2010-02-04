@@ -3,7 +3,7 @@ package WWW::phpBB::Poster;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 use DBI;
 use Digest::MD5 qw[md5_hex];
 
@@ -481,7 +481,8 @@ sub setPost {
     
     return undef if !$params->{user_name};   
     return undef if !$self->{db}->selectrow_array(qq[SELECT topic_id FROM $self->{db_prefix}topics WHERE topic_id=?], undef, $params->{topicID});
-    
+    my $check = $self->{db}->selectrow_array(qq[SELECT post_id FROM $self->{db_prefix}posts WHERE topic_id=? AND forum_id=? AND poster_id=? AND post_text=?], undef, $params->{topicID}, $params->{forumID}, $params->{userID}, ${$params->{text}});
+    return $check if $check;
     $self->{db}->do(qq[
                         INSERT INTO $self->{db_prefix}posts
                         SET

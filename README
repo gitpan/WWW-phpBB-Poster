@@ -1,4 +1,4 @@
-WWW-phpBB-Poster version 0.03
+WWW-phpBB-Poster version 0.04
 =============================
 
 I wrote this module for own purposes - exactly for generating SEO-ready forums, already filled in with some parsed data.
@@ -31,6 +31,6 @@ COPYRIGHT AND LICENCE
 Copyright (C) 2010 by Andrew Jumash
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.10.1 or,
+it under the same terms as Perl itself, either Perl version 5.8.8 or,
 at your option, any later version of Perl 5 you may have available.
 
